@@ -104,4 +104,47 @@ public class Hra {
         }
         return this.jePlnaHPlocha;
     }
+
+    //metoda pre urcenie ci hra ma dostatok rovnakych znakov pre ukoncenie hry
+    public boolean vyhladavanieRovnakychZnakov(String znak, int pocetVitaznych) {
+        int porovnavaniePoctu = 1;
+        // orverovanie stlpca
+        for(int i = 1; i < this.velkostPola; i += 2){
+            if (!this.hraciaPlocha[this.pozX][i].equals(znak))
+                break;
+            if (porovnavaniePoctu == pocetVitaznych){
+                return true;
+            }
+
+            porovnavaniePoctu++;
+        }
+
+        porovnavaniePoctu = 1;
+
+        //overovanie riadku
+        for(int i = 1; i < this.velkostPola; i += 2){
+            if (!this.hraciaPlocha[i][this.pozY].equals(znak))
+                break;
+            if (porovnavaniePoctu == pocetVitaznych) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // metoda pre test for loop continue a break
+    public void vykreslenieFor() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (j == 1) {
+                    continue;
+                } else if (j == 3) {
+                    break;
+                }
+                System.out.print(j);
+            }
+            System.out.println();
+        }
+    }
 }

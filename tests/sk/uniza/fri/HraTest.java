@@ -38,4 +38,9 @@ class HraTest {
     void getJePlnaHPlocha() {
         Assertions.assertTrue(this.hraTest.getJePlnaHPlocha(9));
     }
+
+    @Test
+    void vykreslenieFor() {
+        this.hraTest.vykreslenieFor();
+    }
 }
