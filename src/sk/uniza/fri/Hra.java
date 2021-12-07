@@ -1,5 +1,7 @@
 package sk.uniza.fri;
 
+import java.util.Scanner;
+
 public class Hra {
     private final String[][] hraciaPlocha;
     private final int velkostPola;
@@ -30,7 +32,7 @@ public class Hra {
 
         System.out.println();
 
-        for (int i = 0; i <= this.velkostPola ; i++) {
+        for (int i = 0; i <= this.velkostPola; i++) {
             for (int j = 0; j <= this.velkostPola; j++) {
                 //vertikalny stplec s cislami
                 if ( j == 0) {
@@ -49,11 +51,19 @@ public class Hra {
     }
 
     public void setPozX(int pozX) {
-        this.pozX = this.hodnotyXY(pozX);
+        if (pozX * 2 - 1 <= this.velkostPola) {
+            this.pozX = pozX * 2 - 1;
+        } else {
+            System.out.println("zlé číslo");
+        }
     }
 
     public void setPozY(int pozY) {
-        this.pozY = this.hodnotyXY(pozY);
+        if (pozY * 2 - 1 <= this.velkostPola) {
+            this.pozY = pozY * 2 - 1;
+        } else {
+            System.out.println("zlé číslo");
+        }
     }
 
     public void vyberPolickaPreZnak(String znakHraca) {
@@ -63,21 +73,6 @@ public class Hra {
     // ak nie je obsadene vrati true
     public boolean obsadenostPolicka() {
         return this.hraciaPlocha[this.pozX][this.pozY].equals(" ");
-    }
-
-    public int hodnotyXY(int poz) {
-        if ( this.velkostPola < poz * 2 - 1 || poz * 2 - 1 < 0) {
-            System.out.println("Zlé čislo");
-        } else {
-            if (!this.obsadenostPolicka()) {
-                return poz * 2 - 1;
-            }
-
-            System.out.println("Políčko je obsadené");
-
-        }
-
-        return poz;
     }
 
     //metoda potrebna ak je hracia plocha plná, pomáha ju na novo inicializovat
@@ -97,7 +92,9 @@ public class Hra {
 
     public boolean getJePlnaHPlocha(int cislo) {
         int velkostPola;
+        // pole je v konstruktore zvdojnasobene, tzn. vzdy je parne
         velkostPola = this.velkostPola / 2;
+
 
         if (cislo == velkostPola * velkostPola) {
             this.jePlnaHPlocha = true;
@@ -108,7 +105,7 @@ public class Hra {
     //metoda pre urcenie ci hra ma dostatok rovnakych znakov pre ukoncenie hry
     public boolean vyhladavanieRovnakychZnakov(String znak, int pocetVitaznych) {
         int porovnavaniePoctu = 1;
-        // orverovanie stlpca
+        // orverovanie riadku ->
         for(int i = 1; i < this.velkostPola; i += 2){
             if (!this.hraciaPlocha[this.pozX][i].equals(znak))
                 break;
@@ -121,15 +118,16 @@ public class Hra {
 
         porovnavaniePoctu = 1;
 
-        //overovanie riadku
+        //overovanie stlpca  -> ok
         for(int i = 1; i < this.velkostPola; i += 2){
             if (!this.hraciaPlocha[i][this.pozY].equals(znak))
                 break;
             if (porovnavaniePoctu == pocetVitaznych) {
                 return true;
             }
+            porovnavaniePoctu++;
         }
-
+        //TODO dorobit diagonalu a antidiagonalu
         return false;
     }
 
@@ -146,5 +144,13 @@ public class Hra {
             }
             System.out.println();
         }
+    }
+
+    public int getPozY() {
+        return this.pozY;
+    }
+
+    public int getPozX() {
+        return this.pozX;
     }
 }
