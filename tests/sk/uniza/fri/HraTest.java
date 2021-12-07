@@ -21,12 +21,18 @@ class HraTest {
 
     @Test
     void hodnotyXY() {
-
-        Assertions.assertEquals(1, this.hraTest.hodnotyXY(1));
-        Assertions.assertEquals(3, this.hraTest.hodnotyXY(2));
-        Assertions.assertEquals(5, this.hraTest.hodnotyXY(3));
+        this.hraTest.setPozX(1);
+        Assertions.assertEquals(1, this.hraTest.getPozX());
+        this.hraTest.setPozX(2);
+        Assertions.assertEquals(3, this.hraTest.getPozX());
+        this.hraTest.setPozX(3);
+        Assertions.assertEquals(5, this.hraTest.getPozX());
         //overenie pri zlom výsledku
-        Assertions.assertEquals(4, this.hraTest.hodnotyXY(4));
+        this.hraTest.setPozX(4);
+        Assertions.assertEquals(5, this.hraTest.getPozX());
+        this.hraTest.setPozX(5);
+        Assertions.assertEquals(5, this.hraTest.getPozX());
+
     }
 
     @Test
@@ -43,4 +49,39 @@ class HraTest {
     void vykreslenieFor() {
         this.hraTest.vykreslenieFor();
     }
+
+    @Test
+    // test riedku
+    void vyhladavanieRovnakychZnakov() {
+        this.hraTest.setPozX(2);
+        this.hraTest.setPozY(1);
+        this.hraTest.vyberPolickaPreZnak("x");
+
+        this.hraTest.setPozX(2);
+        this.hraTest.setPozY(2);
+        this.hraTest.vyberPolickaPreZnak("x");
+        this.hraTest.setPozX(2);
+        this.hraTest.setPozY(3);
+        this.hraTest.vyberPolickaPreZnak("x");
+        Assertions.assertTrue(this.hraTest.vyhladavanieRovnakychZnakov("x", 3));
+    }
+
+    @Test
+    //test stlpca
+    void vyhladavanieRovnakychZnakovVS() {
+        this.hraTest.inicializaciaHracejPlochy();
+        this.hraTest.setPozX(1);
+        this.hraTest.setPozY(1);
+        this.hraTest.vyberPolickaPreZnak("x");
+
+        this.hraTest.setPozX(2);
+        this.hraTest.setPozY(1);
+        this.hraTest.vyberPolickaPreZnak("x");
+
+        this.hraTest.setPozX(3);
+        this.hraTest.setPozY(1);
+        this.hraTest.vyberPolickaPreZnak("x");
+        Assertions.assertTrue(this.hraTest.vyhladavanieRovnakychZnakov("x", 3));
+    }
+
 }
