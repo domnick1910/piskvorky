@@ -1,6 +1,6 @@
 package sk.uniza.fri;
 
-import java.util.Scanner;
+
 
 public class Hra {
     private final String[][] hraciaPlocha;
@@ -14,7 +14,9 @@ public class Hra {
         this.pozX = 0;
         this.pozY = 0;
         this.velkostPola = velkostPola * 2;
-        this.hraciaPlocha = new String[this.velkostPola + 1][this.velkostPola + 1]; // this.velskostPola + 1 ,  5 znakov 01234 + 1 pre dosiahnutie 5
+
+        // this.velskostPola + 1 ,  5 znakov 01234 + 1 pre dosiahnutie 5
+        this.hraciaPlocha = new String[this.velkostPola + 1][this.velkostPola + 1];
 
         //inicializácia hracieho pola
         this.inicializaciaHracejPlochy();
@@ -105,7 +107,7 @@ public class Hra {
     //metoda pre urcenie ci hra ma dostatok rovnakych znakov pre ukoncenie hry
     public boolean vyhladavanieRovnakychZnakov(String znak, int pocetVitaznych) {
         int porovnavaniePoctu = 1;
-        // orverovanie riadku ->
+        // orverovanie riadku -> ok
         for(int i = 1; i < this.velkostPola; i += 2){
             if (!this.hraciaPlocha[this.pozX][i].equals(znak))
                 break;
@@ -127,23 +129,39 @@ public class Hra {
             }
             porovnavaniePoctu++;
         }
-        //TODO dorobit diagonalu a antidiagonalu
-        return false;
-    }
 
-    // metoda pre test for loop continue a break
-    public void vykreslenieFor() {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (j == 1) {
-                    continue;
-                } else if (j == 3) {
+        porovnavaniePoctu = 1;
+        // diagonála od 1 1 po n n
+        for (int i = 1; i < this.velkostPola; i += 2) {
+            for (int j = 1; j < this.velkostPola; j +=2 ) {
+                if (!this.hraciaPlocha[i][j].equals(znak)) {
                     break;
                 }
-                System.out.print(j);
+                porovnavaniePoctu++;
+                if (porovnavaniePoctu == pocetVitaznych) {
+                    return true;
+                }
             }
-            System.out.println();
         }
+
+        porovnavaniePoctu = 1;
+        //diagonala od n n po 1 n resp. antidiagonala
+        for (int i = 1; i < this.velkostPola; i += 2) {
+            for (int j = 1; j < this.velkostPola; j += 2) {
+
+                // Condition for secondary diagonal
+                if ((i + j) == this.velkostPola - 1) {
+                    if (!this.hraciaPlocha[i][j].equals(znak)) {
+                        break;
+                    }
+                    if (porovnavaniePoctu == pocetVitaznych) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public int getPozY() {
