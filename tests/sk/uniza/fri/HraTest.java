@@ -16,7 +16,7 @@ class HraTest {
 
     @BeforeEach
     void setUp() {
-        this.hraTest = new Hra(3);
+        this.hraTest = new Hra(4);
     }
 
     @Test
@@ -46,12 +46,7 @@ class HraTest {
     }
 
     @Test
-    void vykreslenieFor() {
-        this.hraTest.vykreslenieFor();
-    }
-
-    @Test
-    // test riedku
+    // test riadku
     void vyhladavanieRovnakychZnakov() {
         this.hraTest.setPozX(2);
         this.hraTest.setPozY(1);
@@ -70,18 +65,18 @@ class HraTest {
     //test stlpca
     void vyhladavanieRovnakychZnakovVS() {
         this.hraTest.inicializaciaHracejPlochy();
-        this.hraTest.setPozX(1);
-        this.hraTest.setPozY(1);
-        this.hraTest.vyberPolickaPreZnak("x");
-
         this.hraTest.setPozX(2);
-        this.hraTest.setPozY(1);
+        this.hraTest.setPozY(2);
         this.hraTest.vyberPolickaPreZnak("x");
 
         this.hraTest.setPozX(3);
-        this.hraTest.setPozY(1);
+        this.hraTest.setPozY(3);
         this.hraTest.vyberPolickaPreZnak("x");
-        Assertions.assertTrue(this.hraTest.vyhladavanieRovnakychZnakov("x", 3));
+
+        this.hraTest.setPozX(4);
+        this.hraTest.setPozY(4);
+        this.hraTest.vyberPolickaPreZnak("x");
+        Assertions.assertFalse(this.hraTest.vyhladavanieRovnakychZnakov("x", 3));
     }
 
 }

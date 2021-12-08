@@ -17,4 +17,5 @@ public class Hrac {
         return this.znak;
     }
 
+
 }
