@@ -72,7 +72,7 @@ public class Hra {
         this.hraciaPlocha[this.pozX][this.pozY] = znakHraca;
     }
 
-    // ak nie je obsadene vrati true
+    // ak je obsadene vrati false
     public boolean obsadenostPolicka() {
         return this.hraciaPlocha[this.pozX][this.pozY].equals(" ");
     }
@@ -92,80 +92,81 @@ public class Hra {
         }
     }
 
-    public boolean getJePlnaHPlocha(int cislo) {
-        int velkostPola;
-        // pole je v konstruktore zvdojnasobene, tzn. vzdy je parne
-        velkostPola = this.velkostPola / 2;
-
-
-        if (cislo == velkostPola * velkostPola) {
-            this.jePlnaHPlocha = true;
-        }
-        return this.jePlnaHPlocha;
-    }
-
-    //metoda pre urcenie ci hra ma dostatok rovnakych znakov pre ukoncenie hry
-    public boolean vyhladavanieRovnakychZnakov(String znak, int pocetVitaznych) {
+    public boolean hladanieVRiadku(String znak) {
         int porovnavaniePoctu = 1;
         // orverovanie riadku -> ok
-        for(int i = 1; i < this.velkostPola; i += 2){
+        for (int i = 1; i < this.velkostPola; i += 2) {
             if (!this.hraciaPlocha[this.pozX][i].equals(znak))
                 break;
-            if (porovnavaniePoctu == pocetVitaznych){
+            if (porovnavaniePoctu == 3) {
                 return true;
             }
 
             porovnavaniePoctu++;
         }
+        return false;
+    }
 
-        porovnavaniePoctu = 1;
-
+    public boolean hladanieVStlpci(String znak) {
+        int porovnavaniePoctu = 1;
         //overovanie stlpca  -> ok
         for(int i = 1; i < this.velkostPola; i += 2){
             if (!this.hraciaPlocha[i][this.pozY].equals(znak))
                 break;
-            if (porovnavaniePoctu == pocetVitaznych) {
+            if (porovnavaniePoctu == 3) {
                 return true;
             }
             porovnavaniePoctu++;
         }
+        return false;
+    }
 
-        porovnavaniePoctu = 1;
+    //metoda pre urcenie ci hra ma dostatok rovnakych znakov pre ukoncenie hry
+    public boolean hladanieDiagonaly(String znak) {
+        int porovnavaniePoctu = 1;
         // diagonála od 1 1 po n n
         for (int i = 1; i < this.velkostPola; i += 2) {
-            for (int j = 1; j < this.velkostPola; j +=2 ) {
+            for (int j = 1; j < this.velkostPola; j += 2) {
                 if (!this.hraciaPlocha[i][j].equals(znak)) {
                     break;
                 }
                 porovnavaniePoctu++;
-                if (porovnavaniePoctu == pocetVitaznych) {
+                if (porovnavaniePoctu == 3) {
                     return true;
                 }
             }
         }
+        return false;
+    }
 
-        porovnavaniePoctu = 1;
+    public boolean hladanieAntiDiagonaly(String znak) {
+        int porovnavaniePoctu = 1;
         //diagonala od n n po 1 n resp. antidiagonala
         for (int i = 1; i < this.velkostPola; i += 2) {
             for (int j = 1; j < this.velkostPola; j += 2) {
-
                 // Condition for secondary diagonal
                 if ((i + j) == this.velkostPola - 1) {
                     if (!this.hraciaPlocha[i][j].equals(znak)) {
                         break;
                     }
-                    if (porovnavaniePoctu == pocetVitaznych) {
+                    porovnavaniePoctu++;
+                    if (porovnavaniePoctu == 3) {
                         return true;
                     }
                 }
             }
         }
-
         return false;
     }
 
     public int getPozY() {
         return this.pozY;
+    }
+
+    public int getVelkostPola(){
+        int velskotPola;
+        velskotPola = this.velkostPola / 2;
+        return velskotPola * velskotPola;
     }
 
     public int getPozX() {
