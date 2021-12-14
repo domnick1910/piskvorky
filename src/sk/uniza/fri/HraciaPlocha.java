@@ -1,15 +1,18 @@
 package sk.uniza.fri;
 
 
+import java.util.ArrayList;
 
 public class HraciaPlocha {
-    private final String[][] hraciaPlocha;
-    private final int velkostPola;
+    private String[][] hraciaPlocha;
+    private int velkostPola;
     private int pozX;
     private int pozY;
     private boolean jePlnaHPlocha;
+    private Policko[][] policka;
 
     public HraciaPlocha(int velkostPola) {
+        //this.policka =;
         this.jePlnaHPlocha = false;
         this.pozX = 0;
         this.pozY = 0;
@@ -19,6 +22,7 @@ public class HraciaPlocha {
         this.hraciaPlocha = new String[this.velkostPola + 1][this.velkostPola + 1];
 
         //inicializácia hracieho pola
+        this.inicializaciaPolicok();
         this.inicializaciaHracejPlochy();
     }
 
@@ -72,11 +76,6 @@ public class HraciaPlocha {
         this.hraciaPlocha[this.pozX][this.pozY] = znakHraca;
     }
 
-    // ak je obsadene vrati false
-    public boolean obsadenostPolicka() {
-        return this.hraciaPlocha[this.pozX][this.pozY].equals(" ");
-    }
-
     //metoda potrebna ak je hracia plocha plná, pomáha ju na novo inicializovat
     public void inicializaciaHracejPlochy() {
         for (int i = 0; i <= this.velkostPola; i++) {
@@ -86,8 +85,16 @@ public class HraciaPlocha {
                 } else if (j % 2 == 0) {
                     this.hraciaPlocha[i][j] = "|";
                 } else {
-                    this.hraciaPlocha[i][j] = " ";
+                    this.hraciaPlocha[i][j] = " "; // inicializovanie Policka[][]
                 }
+            }
+        }
+    }
+
+    public void inicializaciaPolicok() {
+        for (int i = 0; i < this.velkostPola; i++) {
+            for (int j = 0; j < this.velkostPola; j++) {
+                this.policka[i][j] = new Policko(" ", StavPolicka.VOLNE);
             }
         }
     }
@@ -171,5 +178,9 @@ public class HraciaPlocha {
 
     public int getPozX() {
         return this.pozX;
+    }
+
+    public void plnostHracejPlochy() {
+
     }
 }
