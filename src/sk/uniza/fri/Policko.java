@@ -6,18 +6,20 @@ package sk.uniza.fri;
  * @author PC
  */
 public class Policko {
-    private StavPolicka  StavPolicka;
+    private StavPolicka StavPolicka;
     private String znak;
 
 
-    public Policko(String znak) {
-        this.StavPolicka = sk.uniza.fri.StavPolicka.VOLNE; //vymazat pri importe do BlueJ
+    public Policko(String znak, StavPolicka stavPolicka) {
+        this.StavPolicka = stavPolicka; //vymazat pri importe do BlueJ
         this.znak = znak;
     }
-
+    // zmeni stav policka (obsadene = volne / volne = obsadene)
     public void setStavPolicka() {
         if (this.StavPolicka != sk.uniza.fri.StavPolicka.VOLNE) {
             this.StavPolicka = sk.uniza.fri.StavPolicka.VOLNE;
+        } else {
+            this.StavPolicka = sk.uniza.fri.StavPolicka.OBSADENE;
         }
     }
 
