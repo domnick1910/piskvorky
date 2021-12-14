@@ -1,8 +1,5 @@
 package sk.uniza.fri;
 
-
-import java.util.ArrayList;
-
 public class HraciaPlocha {
     private int velkostPola;
     private int pozX;
@@ -72,14 +69,6 @@ public class HraciaPlocha {
 
     public void setPozY(int pozY) {
         this.pozY = pozY;
-    }
-
-    public int getPozX() {
-        return this.pozX;
-    }
-
-    public int getPozY() {
-        return this.pozY;
     }
 
    public void vyberPolickaPreZnak(String znakHraca) {
