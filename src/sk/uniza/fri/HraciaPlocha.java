@@ -13,25 +13,38 @@ public class HraciaPlocha {
         this.pozX = 0;
         this.pozY = 0;
         this.velkostPola = velkostPola;
+
+        // velkolstPole + 1 pre jednoduchsie zadavanie pozicie
         this.policka = new Policko[velkostPola + 1][velkostPola + 1];
 
-
+        for (int i = 1; i <= this.velkostPola; i++) {
+            for (int j = 1; j <= this.velkostPola ; j++) {
+                this.policka[i][j] = new Policko(" ", StavPolicka.VOLNE);
+            }
+        }
     }
 
     public void vykresleniePola() {
         //horizontalny riadok s cislami
-        for (int k = 0; k <= this.velkostPola; k++) {
-            if (k == 0 || k % 2 == 1) {
+        for (int i = 0; i < this.policka.length * 2; i++) {
+            if (i == 0 || i % 2 == 1) {
                 System.out.print(" ");
             } else {
-                System.out.print(k / 2);
+                System.out.print(i / 2);
             }
         }
 
         System.out.println();
-
-        for (int i = 0; i <= this.velkostPola; i++) {
-            for (int j = 0; j <= this.velkostPola; j++) {
+        int poziciaX = 0;
+        for (int i = 0; i <= this.velkostPola * 2; i++) {
+            if (i % 2 == 1) {
+                poziciaX++;
+            }
+            int poziciaY = 0;
+            for (int j = 0; j <= this.velkostPola * 2; j++) {
+                if (j % 2 == 1) {
+                    poziciaY++;
+                }
                 //vertikalny stplec s cislami
                 if ( j == 0) {
                     if (i % 2 == 0) {
@@ -46,8 +59,7 @@ public class HraciaPlocha {
                 } else if (j % 2 == 0) {
                     System.out.print("|");;
                 } else {
-                    //nahradit getZnak
-                    System.out.print(" ");
+                    System.out.print(this.policka[poziciaX][poziciaY].getZnak());
                 }
             }
             System.out.println();
@@ -55,16 +67,25 @@ public class HraciaPlocha {
     }
 
     public void setPozX(int pozX) {
-
+        this.pozX = pozX;
     }
 
     public void setPozY(int pozY) {
+        this.pozY = pozY;
     }
 
-   /* public void vyberPolickaPreZnak(String znakHraca) {
-        this.hraciaPlocha[this.pozX][this.pozY] = znakHraca;
+    public int getPozX() {
+        return this.pozX;
     }
 
+    public int getPozY() {
+        return this.pozY;
+    }
+
+   public void vyberPolickaPreZnak(String znakHraca) {
+        this.policka[this.pozX][this.pozY].setZnak(znakHraca);
+    }
+/*
     public boolean hladanieVRiadku(String znak) {
         int porovnavaniePoctu = 1;
         // orverovanie riadku -> ok
@@ -111,13 +132,5 @@ public class HraciaPlocha {
         }
         return false;
     }*/
-
-    public int getPozX() {
-        return this.pozX;
-    }
-
-    public int getPozY() {
-        return this.pozY;
-    }
 
 }
