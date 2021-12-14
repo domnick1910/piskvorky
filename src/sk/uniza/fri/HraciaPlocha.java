@@ -2,14 +2,14 @@ package sk.uniza.fri;
 
 
 
-public class Hra {
+public class HraciaPlocha {
     private final String[][] hraciaPlocha;
     private final int velkostPola;
     private int pozX;
     private int pozY;
     private boolean jePlnaHPlocha;
 
-    public Hra(int velkostPola) {
+    public HraciaPlocha(int velkostPola) {
         this.jePlnaHPlocha = false;
         this.pozX = 0;
         this.pozY = 0;
