@@ -4,26 +4,18 @@ package sk.uniza.fri;
 import java.util.ArrayList;
 
 public class HraciaPlocha {
-    private String[][] hraciaPlocha;
     private int velkostPola;
     private int pozX;
     private int pozY;
-    private boolean jePlnaHPlocha;
     private Policko[][] policka;
 
     public HraciaPlocha(int velkostPola) {
-        //this.policka =;
-        this.jePlnaHPlocha = false;
         this.pozX = 0;
         this.pozY = 0;
-        this.velkostPola = velkostPola * 2;
+        this.velkostPola = velkostPola;
+        this.policka = new Policko[velkostPola + 1][velkostPola + 1];
 
-        // this.velskostPola + 1 ,  5 znakov 01234 + 1 pre dosiahnutie 5
-        this.hraciaPlocha = new String[this.velkostPola + 1][this.velkostPola + 1];
 
-        //inicializácia hracieho pola
-        this.inicializaciaPolicok();
-        this.inicializaciaHracejPlochy();
     }
 
     public void vykresleniePola() {
@@ -49,54 +41,28 @@ public class HraciaPlocha {
                     }
                 }
                 // vykreslenie hodnoty
-                System.out.print(this.hraciaPlocha[i][j]);
-
+                if (i % 2 == 0) {
+                    System.out.print("-");
+                } else if (j % 2 == 0) {
+                    System.out.print("|");;
+                } else {
+                    //nahradit getZnak
+                    System.out.print(" ");
+                }
             }
             System.out.println();
         }
     }
 
     public void setPozX(int pozX) {
-        if (pozX * 2 - 1 <= this.velkostPola) {
-            this.pozX = pozX * 2 - 1;
-        } else {
-            System.out.println("zlé číslo");
-        }
+
     }
 
     public void setPozY(int pozY) {
-        if (pozY * 2 - 1 <= this.velkostPola) {
-            this.pozY = pozY * 2 - 1;
-        } else {
-            System.out.println("zlé číslo");
-        }
     }
 
-    public void vyberPolickaPreZnak(String znakHraca) {
+   /* public void vyberPolickaPreZnak(String znakHraca) {
         this.hraciaPlocha[this.pozX][this.pozY] = znakHraca;
-    }
-
-    //metoda potrebna ak je hracia plocha plná, pomáha ju na novo inicializovat
-    public void inicializaciaHracejPlochy() {
-        for (int i = 0; i <= this.velkostPola; i++) {
-            for (int j = 0; j <= this.velkostPola; j++) {
-                if (i % 2 == 0) {
-                    this.hraciaPlocha[i][j] = "-";
-                } else if (j % 2 == 0) {
-                    this.hraciaPlocha[i][j] = "|";
-                } else {
-                    this.hraciaPlocha[i][j] = " "; // inicializovanie Policka[][]
-                }
-            }
-        }
-    }
-
-    public void inicializaciaPolicok() {
-        for (int i = 0; i < this.velkostPola; i++) {
-            for (int j = 0; j < this.velkostPola; j++) {
-                this.policka[i][j] = new Policko(" ", StavPolicka.VOLNE);
-            }
-        }
     }
 
     public boolean hladanieVRiadku(String znak) {
@@ -144,43 +110,14 @@ public class HraciaPlocha {
             }
         }
         return false;
-    }
+    }*/
 
-    public boolean hladanieAntiDiagonaly(String znak) {
-        int porovnavaniePoctu = 1;
-        //diagonala od n n po 1 n resp. antidiagonala
-        for (int i = 1; i < this.velkostPola; i += 2) {
-            for (int j = 1; j < this.velkostPola; j += 2) {
-                // Condition for secondary diagonal
-                if ((i + j) == this.velkostPola - 1) {
-                    if (!this.hraciaPlocha[i][j].equals(znak)) {
-                        break;
-                    }
-                    porovnavaniePoctu++;
-                    if (porovnavaniePoctu == 3) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+    public int getPozX() {
+        return this.pozX;
     }
 
     public int getPozY() {
         return this.pozY;
     }
 
-    public int getVelkostPola(){
-        int velskotPola;
-        velskotPola = this.velkostPola / 2;
-        return velskotPola * velskotPola;
-    }
-
-    public int getPozX() {
-        return this.pozX;
-    }
-
-    public void plnostHracejPlochy() {
-
-    }
 }
