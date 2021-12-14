@@ -14,10 +14,10 @@ class HraTest {
 
     @BeforeEach
     void setUp() {
-        this.hraTest = new HraciaPlocha(4);
+        this.hraTest = new HraciaPlocha(5);
     }
 
-    @Test
+    /*@Test
     void hodnotyXY() {
         this.hraTest.setPozX(1);
         Assertions.assertEquals(1, this.hraTest.getPozX());
@@ -31,16 +31,19 @@ class HraTest {
         this.hraTest.setPozX(5);
         Assertions.assertEquals(5, this.hraTest.getPozX());
 
-    }
+    }*/
 
     @Test
     void vykresleniePola() {
+        this.hraTest.setPozX(5);
+        this.hraTest.setPozY(5);
+        this.hraTest.vyberPolickaPreZnak("x");
         this.hraTest.vykresleniePola();
     }
 
 
 
-    @Test
+   /*@Test
     // test riadku
     void vyhladavanieRovnakychZnakov() {
         this.hraTest.setPozX(2);
@@ -59,7 +62,7 @@ class HraTest {
     @Test
     //test stlpca
     void vyhladavanieRovnakychZnakovVS() {
-        this.hraTest.inicializaciaHracejPlochy();
+        //this.hraTest.inicializaciaHracejPlochy();
         this.hraTest.setPozX(2);
         this.hraTest.setPozY(2);
         this.hraTest.vyberPolickaPreZnak("x");
@@ -72,6 +75,6 @@ class HraTest {
         this.hraTest.setPozY(4);
         this.hraTest.vyberPolickaPreZnak("x");
         //Assertions.assertFalse(this.hraTest.vyhladavanieRovnakychZnakov("x", 3));
-    }
+    }*/
 
 }
