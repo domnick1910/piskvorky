@@ -75,7 +75,6 @@ public class HraciaPlocha {
         this.policka[this.pozY][this.pozX].setZnak(znakHraca);
     }
 
-    //TODO vyriesit ukoncenie hry
     public boolean hladanieVRiadku(String znak) {
         int porovnavaniePoctu = 1;
 
@@ -154,5 +153,18 @@ public class HraciaPlocha {
             }
         }
         return false;
+    }
+
+    // ak je plne vrati true
+    public boolean plnostHracejPlochy() {
+        for (int i = 1; i <= this.velkostPola; i++) {
+            for (int j = 1; j <= this.velkostPola; j++) {
+                if (this.policka[i][j].getStavPolicka().equals(StavPolicka.VOLNE)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
