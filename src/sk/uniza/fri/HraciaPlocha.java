@@ -4,7 +4,7 @@ public class HraciaPlocha {
     private final int velkostPola;
     private int pozX;
     private int pozY;
-    private Policko[][] policka;
+    private final Policko[][] policka;
 
     public HraciaPlocha(int velkostPola) {
         this.pozX = 0;
@@ -56,7 +56,7 @@ public class HraciaPlocha {
                 } else if (j % 2 == 0) {
                     System.out.print("|");;
                 } else {
-                    System.out.print(this.policka[poziciaX][poziciaY].getZnak());
+                    System.out.print(this.policka[poziciaY][poziciaX].getZnak());
                 }
             }
             System.out.println();
@@ -72,7 +72,7 @@ public class HraciaPlocha {
     }
 
    public void vyberPolickaPreZnak(String znakHraca) {
-        this.policka[this.pozX][this.pozY].setZnak(znakHraca);
+        this.policka[this.pozY][this.pozX].setZnak(znakHraca);
     }
 
     //TODO vyriesit ukoncenie hry
@@ -81,7 +81,7 @@ public class HraciaPlocha {
 
         // orverovanie riadku -> ok
         for (int i = 1; i <= this.velkostPola ; i++) {
-            if (this.policka[this.pozX][i].getZnak().equals(znak)) {
+            if (this.policka[this.pozY][i].getZnak().equals(znak)) {
                 porovnavaniePoctu++;
             } else {
                 porovnavaniePoctu = 0;
@@ -99,7 +99,7 @@ public class HraciaPlocha {
 
         //overovanie stlpca  -> ok
         for(int i = 1; i <= this.velkostPola; i++) {
-            if (this.policka[i][this.pozY].getZnak().equals(znak)) {
+            if (this.policka[i][this.pozX].getZnak().equals(znak)) {
                 porovnavaniePoctu++;
             } else {
                 porovnavaniePoctu = 0;
