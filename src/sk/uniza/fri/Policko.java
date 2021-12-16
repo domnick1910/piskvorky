@@ -16,10 +16,10 @@ public class Policko {
     }
     // zmeni stav policka (obsadene = volne / volne = obsadene)
     public void setStavPolicka() {
-        if (this.StavPolicka != sk.uniza.fri.StavPolicka.VOLNE) {
-            this.StavPolicka = sk.uniza.fri.StavPolicka.VOLNE;
+        if (this.StavPolicka != this.StavPolicka.VOLNE) {
+            this.StavPolicka = this.StavPolicka.VOLNE;
         } else {
-            this.StavPolicka = sk.uniza.fri.StavPolicka.OBSADENE;
+            this.StavPolicka = this.StavPolicka.OBSADENE;
         }
     }
 
