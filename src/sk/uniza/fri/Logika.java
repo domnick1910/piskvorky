@@ -1,6 +1,7 @@
 package sk.uniza.fri;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * 2. 12. 2021 - 19:08
@@ -9,7 +10,6 @@ import java.util.ArrayList;
  */
 public class Logika {
     private HraciaPlocha hraciaPlocha;
-    private int pocetHracov;
     private int velkostHracejPlochy;
     private boolean jeKoniec;
 
@@ -17,6 +17,7 @@ public class Logika {
         this.jeKoniec = false;
         this.vypocetHracejPlochy(pocetHracov);
         this.hraciaPlocha = new HraciaPlocha(this.velkostHracejPlochy);
+
     }
 
     public void vypocetHracejPlochy(int pocetHracov) {
@@ -33,12 +34,17 @@ public class Logika {
     // Ak bude hracia plocha plna,
     // da na vyber ci obnovit hraciu plochu, alebo ma skoncit
     public void obnovaHracejPlochy(String znak) {
+        Scanner sc = new Scanner(System.in);
+        String novyZnak;
+
         switch (znak) {
-            case "Y": this.hraciaPlocha.vykresleniePola();
+            case "Y": this.hraciaPlocha = new HraciaPlocha(this.velkostHracejPlochy);
                 break;
             case "N": this.jeKoniec = true;
                 break;
             default: System.out.println("Zlý znak");
+                     novyZnak = sc.nextLine();
+                     this.obnovaHracejPlochy(novyZnak);
                 break;
         }
     }
