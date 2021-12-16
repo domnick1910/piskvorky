@@ -1,7 +1,7 @@
 package sk.uniza.fri;
 
 public class HraciaPlocha {
-    private int velkostPola;
+    private final int velkostPola;
     private int pozX;
     private int pozY;
     private Policko[][] policka;
@@ -74,52 +74,85 @@ public class HraciaPlocha {
    public void vyberPolickaPreZnak(String znakHraca) {
         this.policka[this.pozX][this.pozY].setZnak(znakHraca);
     }
-/*
+
+    //TODO vyriesit ukoncenie hry
     public boolean hladanieVRiadku(String znak) {
         int porovnavaniePoctu = 1;
+
         // orverovanie riadku -> ok
-        for (int i = 1; i < this.velkostPola; i += 2) {
-            if (!this.hraciaPlocha[this.pozX][i].equals(znak))
-                break;
+        for (int i = 1; i <= this.velkostPola ; i++) {
+            if (this.policka[this.pozX][i].getZnak().equals(znak)) {
+                porovnavaniePoctu++;
+            } else {
+                porovnavaniePoctu = 0;
+            }
+
             if (porovnavaniePoctu == 3) {
                 return true;
             }
-
-            porovnavaniePoctu++;
         }
         return false;
     }
 
     public boolean hladanieVStlpci(String znak) {
         int porovnavaniePoctu = 1;
+
         //overovanie stlpca  -> ok
-        for(int i = 1; i < this.velkostPola; i += 2){
-            if (!this.hraciaPlocha[i][this.pozY].equals(znak))
-                break;
+        for(int i = 1; i <= this.velkostPola; i++) {
+            if (this.policka[i][this.pozY].getZnak().equals(znak)) {
+                porovnavaniePoctu++;
+            } else {
+                porovnavaniePoctu = 0;
+            }
+
             if (porovnavaniePoctu == 3) {
                 return true;
             }
-            porovnavaniePoctu++;
         }
         return false;
     }
 
-    //metoda pre urcenie ci hra ma dostatok rovnakych znakov pre ukoncenie hry
     public boolean hladanieDiagonaly(String znak) {
         int porovnavaniePoctu = 1;
-        // diagonála od 1 1 po n n
-        for (int i = 1; i < this.velkostPola; i += 2) {
-            for (int j = 1; j < this.velkostPola; j += 2) {
-                if (!this.hraciaPlocha[i][j].equals(znak)) {
-                    break;
+
+        // diagonála od 1 1 po n n -> ok
+        for (int i = 1; i <= this.velkostPola; i++) {
+            for (int j = 1; j <= this.velkostPola; j++) {
+                if (i == j) {
+                    if (this.policka[i][j].getZnak().equals(znak)) {
+                        porovnavaniePoctu++;
+                    } else {
+                        porovnavaniePoctu = 0;
+                    }
                 }
-                porovnavaniePoctu++;
+
                 if (porovnavaniePoctu == 3) {
                     return true;
                 }
             }
         }
         return false;
-    }*/
+    }
 
+    public boolean hladanieAntiDiagonaly(String znak) {
+        int porovnavaniePoctu = 1;
+
+        // diagonála od 1 n po n 1 ->
+        for (int i = 1; i <= this.velkostPola; i++) {
+            for (int j = 1; j <= this.velkostPola; j++) {
+                if ((i + j) - 1 == this.velkostPola) {
+                    if (this.policka[i][j].getZnak().equals(znak)) {
+                        porovnavaniePoctu++;
+                    } else {
+                        porovnavaniePoctu = 0;
+                    }
+                }
+
+                if (porovnavaniePoctu == 3) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
